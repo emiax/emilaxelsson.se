@@ -1,8 +1,7 @@
 html {
-  background: linear-gradient(to bottom, #003030, #000030);
   color: #fff;
-  min-height: 100%;
-  transition: all 0.5s;
+  background: linear-gradient(to bottom, #003030, #000030);
+  min-height: 100vh;
 }
 
 body {
@@ -11,10 +10,10 @@ body {
   font-size: 20px;
 }
 
-header {
-  max-width: 800px;
-  padding: 20px;
-  margin: 7% auto 0;
+.background-pattern {
+  position: absolute;
+  top: 0;
+  opacity: 0.05;
 }
 
 h1 {
@@ -28,12 +27,8 @@ h1 {
 p {
   line-height: 1.6em;
   color: #ccd;
-}
-
-p.ingress {
+  margin-bottom: 2em;
   font-size: 1.2em;
-  font-weight: bold;
-  color: #fff;
 }
 
 p strong {
@@ -44,33 +39,28 @@ a {
   color: #f0f4b8;
   text-decoration: none;
   border-bottom: 1px solid rgba(240, 244, 184, 0.5);
-  transition: border 0.5s;
+  padding-bottom: 0.1em;
+  transition: all 0.2s;
 }
 
 a:hover {
- border-bottom: 1px solid rgba(240, 244, 184, 1); 
+ border-bottom: 3px solid rgba(240, 244, 184, 1); 
 }
 
-footer {
-  font-size: 0.9em;
-  margin-top: 50px;
-  width: 90%;
-}
-
-footer ul {
+ul {
   list-style-type: none;
   padding: 0;
+  overflow: hidden;
 }
 
-footer li {
-
+li {
   float: left;
   margin-right: 2.2em;
   margin-bottom: 1.2em;
-  white-space: nowrap;
+  white-space: nowrap; 
 }
 
-footer li i {
+li i {
   margin-right: 0.4em;
   display: block;
 }
@@ -80,8 +70,8 @@ h1 span {
 }
 
 @media (max-width: 600px) {
-  html, body {
-    padding: 10px;
+  .wrapper {
+    margin: 10px;
   }
 
   footer li {
@@ -91,15 +81,48 @@ h1 span {
 
 .logo polyline, .logo line {
   stroke-width: 4px;
-  transition: all 0.5s ease-in-out;
+  transition: all 0.2s ease-in-out;
 }
 
 .logo:hover polyline, .logo:hover line {
-  stroke-width: 10px;
+  stroke-width: 8px;
 }
 
-.container {
+section {
+  min-height: 100vh;
+  position: relative;
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+}
+
+.wrapper {
   max-width: 800px;
   padding: 20px;
   margin: 0 auto 0;
+  z-index: 1;
+  position: relative;
+}
+
+.overlay {
+  flex-direction: column;
+  justify-content: center;
+  display: flex;
+  position: absolute;
+  z-index: 2;
+  width: 100%;
+  min-height: 100%;
+}
+
+.background {
+  position: fixed;
+}
+
+svg {
+  user-select: none;
+  margin-top: 3em;
+}
+
+ul {
+  margin-bottom: 5em;
 }

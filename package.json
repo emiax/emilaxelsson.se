@@ -4,9 +4,11 @@
   "private": true,
   "dependencies": {
     "font-awesome": "^4.7.0",
-    "react": "^16.5.2",
-    "react-dom": "^16.5.2",
-    "react-scripts": "2.0.4"
+    "prop-types": "^15.7.2",
+    "react": "^16.9.0",
+    "react-dom": "^16.9.0",
+    "react-scripts": "3.1.1",
+    "webgl-canvas": "^1.0.1"
   },
   "scripts": {
     "start": "react-scripts start",
