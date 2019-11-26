@@ -99,20 +99,31 @@ const Pattern = props => {
   const browserDimensions = useBrowserDimensions();
 
   useEffect(() => {
-    // Get shaders.
     (async () => {
-      const promises = [fetch('./logovertex.glsl'), fetch('./logofragment.glsl')];
-      const shaders = await Promise.all(promises);
-      const [vertexShaderSource, fragmentShaderSource] =
-        await Promise.all(shaders.map(shader => shader.text()));
-      setVertexShader(vertexShaderSource);
-      setFragmentShader(fragmentShaderSource);
+      try {
+        const promises = [fetch('./logovertex.glsl'), fetch('./logofragment.glsl')];
+        const shaders = await Promise.all(promises);
+        const [vertexShaderSource, fragmentShaderSource] =
+          await Promise.all(shaders.map(shader => shader.text()));
+        setVertexShader(vertexShaderSource);
+        setFragmentShader(fragmentShaderSource);
+      } catch (e) {
+        props.onFail();
+      }
     })();
   });
 
   if (vertexShader && fragmentShader) {
     const render = gl => renderGraphics(gl, browserDimensions);
-    const initialize = gl => initializeGraphics(gl, vertexShader, fragmentShader);
+    const initialize = gl => {
+      try {
+        initializeGraphics(gl, vertexShader, fragmentShader);
+      } catch (e) {
+        props.onFail();
+        return null;
+      }
+      props.onInitialize();
+    }
 
     return <WebGLComponent
       size={browserDimensions}
@@ -125,11 +136,13 @@ const Pattern = props => {
   }
 }
 
-const Site = props =>
-  <div>
-      <Pattern/>
+const Site = props => {
+  const [contentVisible, setContentVisibility] = useState(false);
+  const fadeInContent = () => setContentVisibility(true);
+  return (<div>
+      <Pattern onInitialize={fadeInContent} onFail={fadeInContent}/>
       <div className="overlay">
-        <div className="wrapper">
+        <div className={[contentVisible ? 'fadeIn' : '', 'wrapper'].join(' ')}>
           <Logo onClick={nudge}/>
           <h1>Hello, I'm Emil. </h1>
           <p>
@@ -146,6 +159,8 @@ const Site = props =>
           </ul>
         </div>
       </div>
-  </div>
+  </div>);
+}
+  
 
 export default Site;

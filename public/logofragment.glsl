@@ -1,4 +1,4 @@
-precision lowp float;
+precision mediump float;
 
 uniform float time;
 uniform float patternIntensity;
@@ -112,8 +112,10 @@ float noise(vec2 p){
 
 void main() {    
   float strokeWidth = 2.0;
-  
-  float modifiedTime = time + sin(time + position.x) * cos(time + position.y);
+  float timeModificationFreq = 0.001;
+  float modifiedTime = time +
+    sin(time + gl_FragCoord.x * timeModificationFreq) *
+    cos(time + gl_FragCoord.y * timeModificationFreq);
 
   // For squares
   float beta1 =  M_PI / 2.0;

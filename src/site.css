@@ -17,11 +17,11 @@ body {
 }
 
 h1 {
- font-family: 'Karla', sans-serif; 
- letter-spacing: -0.05em;
- font-size: 4em;
- font-weight: 700;
- margin: 0.2em 0;
+  font-family: 'Karla', sans-serif; 
+  letter-spacing: -0.05em;
+  font-size: 4em;
+  font-weight: 700;
+  margin: 0.2em 0;
 }
 
 p {
@@ -87,6 +87,28 @@ h1 span {
 .logo:hover polyline, .logo:hover line {
   stroke-width: 8px;
 }
+
+.wrapper > * {
+  transition: 0.8s all;
+  opacity: 0;
+}
+
+.wrapper.fadeIn > * {
+  opacity: 1;
+}
+
+.wrapper h1 {
+  transition-delay: 0.1s;
+}
+
+.wrapper p {
+  transition-delay: 0.2s;
+}
+
+.wrapper ul {
+  transition-delay: 0.3s;
+}
+
 
 section {
   min-height: 100vh;
